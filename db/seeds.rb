@@ -32,5 +32,8 @@ end
 users = User.all
 20.times do
   content = Faker::ChuckNorris.fact
+  until content.length < 135
+   content = Faker::ChuckNorris.fact
+  end
   users.each { |user| user.microposts.create!(content: content) }
 end
