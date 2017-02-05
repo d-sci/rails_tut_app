@@ -28,3 +28,9 @@ names = ['Sitamop', 'Brown NRG', 'Mux']
                activated_at: Time.zone.now
                )
 end
+
+users = User.all
+20.times do
+  content = Faker::ChuckNorris.fact
+  users.each { |user| user.microposts.create!(content: content) }
+end
