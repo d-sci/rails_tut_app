@@ -13,7 +13,7 @@ User.create!(name:  "D-Sci",
              
 names = ['Sitamop', 'Brown NRG', 'Mux']
 3.times do |n|
-  name  = names[n-1]
+  name  = names[n]
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(name:  name,
