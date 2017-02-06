@@ -27,17 +27,27 @@ end
 
 # Microposts
 users = User.all
-20.times do
-  content = Faker::ChuckNorris.fact
-  until content.length < 135
-   content = Faker::ChuckNorris.fact
+facts = []
+200.times do
+  fact = Faker::ChuckNorris.fact
+  facts << fact if fact.length < 138
+end
+
+n = facts.length/4
+n.times do |i|
+  users.each do |user|
+    user.microposts.create!(content: facts[i+n*(user.id-1)])
   end
-  users.each { |user| user.microposts.create!(content: content) }
 end
 
 # Following relationships
 user  = users.first
 following = users[1..3]
-followers = users[2..3]
+followers = users[1..3]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
+user  = users.second
+following = users[2..3]
+followers = users[2..2]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
